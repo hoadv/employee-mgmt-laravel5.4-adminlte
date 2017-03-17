@@ -32,7 +32,7 @@ class UserManagementController extends Controller
      */
     public function index()
     {
-        $users = DB::table('users')->get();
+        $users = User::paginate(5);
 
         return view('users-mgmt/index', ['users' => $users]);
     }
@@ -84,8 +84,7 @@ class UserManagementController extends Controller
      */
     public function edit($id)
     {
-        $user = DB::table('users')
-            ->where('id', $id)
+        $user = User::where('id', $id)
             ->get();
 
         // Redirect to user list if updating user wasn't existed
@@ -106,11 +105,17 @@ class UserManagementController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
-        $this->validateInput($request);
-        $input = $request->all();
-        DB::table('users')
-            ->where('id', $id)
-            ->update(['users' => $input]);
+        $constraints = ['name' => 'required|max:255'];
+        $input = [
+            'name' => $request['name']
+        ];
+        if ($request['password'] != null && strlen($request['password']) > 0) {
+            $constraints['password'] = 'required|min:6|confirmed';
+            $input['password'] =  bcrypt($request['password']);
+        }
+        $this->validate($request, $constraints);
+        User::where('id', $id)
+            ->update($input);
         
         return redirect()->intended('/user-management');
     }
@@ -123,7 +128,8 @@ class UserManagementController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::where('id', $id)->delete();
+         return redirect()->intended('/user-management');
     }
 
     private function validateInput($request) {

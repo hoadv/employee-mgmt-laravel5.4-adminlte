@@ -36,8 +36,14 @@
                   <td class="sorting_1">{{ $user->name }}</td>
                   <td>{{ $user->email }}</td>
                   <td>
-                    <a href="{{ url('user-management/'.$user->id.'/edit') }}" class="btn btn-warning">Update</a>
-                    <a href="" class="btn btn-danger">Delete</a>
+                    <form method="POST" action="{{ route('user-management.destroy', ['id' => $user->id]) }}" onsubmit = "return confirm('Are you sure?')">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <a href="{{ route('user-management.edit', ['id' => $user->id]) }}" class="btn btn-warning">Update</a>
+                         <button type="submit" class="btn btn-danger">
+                          Delete
+                        </button>
+                    </form>
                   </td>
               </tr>
             @endforeach
@@ -58,16 +64,7 @@
         </div>
         <div class="col-sm-7">
           <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
-            <ul class="pagination">
-              <li class="paginate_button previous" id="example2_previous"><a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0">Previous</a></li>
-              <li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="1" tabindex="0">1</a></li>
-              <li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="2" tabindex="0">2</a></li>
-              <li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="3" tabindex="0">3</a></li>
-              <li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="4" tabindex="0">4</a></li>
-              <li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="5" tabindex="0">5</a></li>
-              <li class="paginate_button active"><a href="#" aria-controls="example2" data-dt-idx="6" tabindex="0">6</a></li>
-              <li class="paginate_button next disabled" id="example2_next"><a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0">Next</a></li>
-            </ul>
+            {{ $users->links() }}
           </div>
         </div>
       </div>
