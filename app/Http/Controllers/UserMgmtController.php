@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserMgmtController extends Controller
 {
@@ -23,6 +24,8 @@ class UserMgmtController extends Controller
      */
     public function index()
     {
-        return view('user-mgmt');
+        $users = DB::table('users')->get();
+
+        return view('user-mgmt', ['users' => $users]);
     }
 }

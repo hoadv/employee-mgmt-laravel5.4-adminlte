@@ -47,7 +47,7 @@
             <li><a href="{{ url('system-management/city') }}">City</a></li>
           </ul>
         </li>
-        <li><a href="{{ url('user-management') }}"><i class="fa fa-link"></i> <span>User management</span></a></li>
+        <li><a href="{{ route('user-management.index') }}"><i class="fa fa-link"></i> <span>User management</span></a></li>
       </ul>
       <!-- /.sidebar-menu -->
     </section>

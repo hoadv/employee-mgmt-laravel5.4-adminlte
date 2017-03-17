@@ -18,8 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/dashboard', 'DashboardController@index');
-Route::get('/user-management', 'UserMgmtController@index');
 Route::get('/system-management/{option}', 'SystemMgmtController@index');
 Route::get('/employee-management', 'EmployeeMgmtController@index');
-
 Route::get('/profile', 'ProfileController@index');
+Route::resource('user-management', 'UserManagementController');
