@@ -25,7 +25,7 @@
               <!-- The user image in the navbar-->
               <img src="{{ asset("/bower_components/AdminLTE/dist/img/user2-160x160.jpg") }}" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">{{ Auth::user()->name }}</span>
+              <span class="hidden-xs">{{ Auth::user()->username }}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
@@ -33,14 +33,14 @@
                 <img src="{{ asset("/bower_components/AdminLTE/dist/img/user2-160x160.jpg") }}" class="img-circle" alt="User Image">
 
                 <p>
-                  Hello {{ Auth::user()->name }}
+                  Hello {{ Auth::user()->username }}
                 </p>
               </li>
               <!-- Menu Footer-->
               <li class="user-footer">
                @if (Auth::guest())
                   <div class="pull-left">
-                    <a href="{{ route('register') }}" class="btn btn-default btn-flat">Register</a>
+                    <a href="{{ route('login') }}" class="btn btn-default btn-flat">Login</a>
                   </div>
                @else
                  <div class="pull-left">

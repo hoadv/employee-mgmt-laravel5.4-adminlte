@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
 class LoginController extends Controller
 {
     /*
@@ -26,6 +25,20 @@ class LoginController extends Controller
      * @var string
      */
     protected $redirectTo = '/dashboard';
+
+     /**
+     * Determine if the user has too many failed login attempts.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return bool
+     */
+    protected function hasTooManyLoginAttempts ($request) {
+        $maxLoginAttempts = 2;
+        $lockoutTime = 5; // 5 minutes
+        return $this->limiter()->tooManyAttempts(
+            $this->throttleKey($request), $maxLoginAttempts, $lockoutTime
+        );
+    }
     /**
      * Create a new controller instance.
      *

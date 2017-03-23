@@ -57,9 +57,11 @@ class UserManagementController extends Controller
     {
         $this->validateInput($request);
          User::create([
-            'name' => $request['name'],
+            'username' => $request['username'],
             'email' => $request['email'],
             'password' => bcrypt($request['password']),
+            'firstname' => $request['firstname'],
+            'lastname' => $request['lastname']
         ]);
 
         return redirect()->intended('/user-management');
@@ -84,15 +86,13 @@ class UserManagementController extends Controller
      */
     public function edit($id)
     {
-        $user = User::where('id', $id)
-            ->get();
-
+        $user = User::find($id);
         // Redirect to user list if updating user wasn't existed
         if ($user == null || count($user) == 0) {
             return redirect()->intended('/user-management');
         }
 
-        return view('users-mgmt/edit', ['user' => $user[0]]);
+        return view('users-mgmt/edit', ['user' => $user]);
     }
 
     /**
@@ -105,9 +105,15 @@ class UserManagementController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
-        $constraints = ['name' => 'required|max:255'];
+        $constraints = [
+            'username' => 'required|max:20',
+            'firstname'=> 'required|max:60',
+            'lastname' => 'required|max:60'
+            ];
         $input = [
-            'name' => $request['name']
+            'username' => $request['username'],
+            'firstname' => $request['firstname'],
+            'lastname' => $request['lastname']
         ];
         if ($request['password'] != null && strlen($request['password']) > 0) {
             $constraints['password'] = 'required|min:6|confirmed';
@@ -132,11 +138,44 @@ class UserManagementController extends Controller
          return redirect()->intended('/user-management');
     }
 
+    /**
+     * Search user from database base on some specific constraints
+     *
+     * @param  \Illuminate\Http\Request  $request
+     *  @return \Illuminate\Http\Response
+     */
+    public function search(Request $request) {
+        $constraints = [
+            'username' => $request['username'],
+            'firstname' => $request['firstname'],
+            'lastname' => $request['lastname'],
+            'department' => $request['department']
+            ];
+
+       $users = $this->doSearchingQuery($constraints);
+       return view('users-mgmt/index', ['users' => $users, 'searchingVals' => $constraints]);
+    }
+
+    private function doSearchingQuery($constraints) {
+        $query = User::query();
+        $fields = array_keys($constraints);
+        $index = 0;
+        foreach ($constraints as $constraint) {
+            if ($constraint != null) {
+                $query = $query->where( $fields[$index], 'like', '%'.$constraint.'%');
+            }
+
+            $index++;
+        }
+        return $query->paginate(5);
+    }
     private function validateInput($request) {
         $this->validate($request, [
-        'name' => 'required|max:255',
+        'username' => 'required|max:20',
         'email' => 'required|email|max:255|unique:users',
         'password' => 'required|min:6|confirmed',
+        'firstname' => 'required|max:60',
+        'lastname' => 'required|max:60'
     ]);
     }
 }
