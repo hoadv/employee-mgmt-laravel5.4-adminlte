@@ -142,7 +142,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group{{ $errors->has('department_id') ? ' has-error' : '' }}">
                             <label class="col-md-4 control-label">Department</label>
                             <div class="col-md-6">
                                 <select class="form-control" name="department_id">
@@ -150,9 +150,14 @@
                                         <option value="{{$department->id}}">{{$department->name}}</option>
                                     @endforeach
                                 </select>
+                                 @if ($errors->has('department_id'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('department_id') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group{{ $errors->has('division_id') ? ' has-error' : '' }}">
                             <label class="col-md-4 control-label">Division</label>
                             <div class="col-md-6">
                                 <select class="form-control" name="division_id">
@@ -160,6 +165,11 @@
                                         <option value="{{$division->id}}">{{$division->name}}</option>
                                     @endforeach
                                 </select>
+                                 @if ($errors->has('division_id'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('division_id') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
                         <div class="form-group">

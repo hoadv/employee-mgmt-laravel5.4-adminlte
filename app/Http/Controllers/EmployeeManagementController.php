@@ -75,7 +75,7 @@ class EmployeeManagementController extends Controller
         $input = $this->createQueryInput($keys, $request);
         $input['picture'] = $path;
         // Not implement yet
-        $input['company_id'] = 0;
+        // $input['company_id'] = 0;
         Employee::create($input);
 
         return redirect()->intended('/employee-management');
@@ -207,8 +207,6 @@ class EmployeeManagementController extends Controller
             'firstname' => 'required|max:60',
             'middlename' => 'required|max:60',
             'address' => 'required|max:120',
-            'city_id' => 'required',
-            'state_id' => 'required',
             'country_id' => 'required',
             'zip' => 'required|max:10',
             'age' => 'required',

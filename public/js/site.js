@@ -1,5 +1,7 @@
 function loadItems(element, path, selectInputClass) {
   var selectedVal = $(element).val();
+
+  // select all
   if (selectedVal == -1) {
     return;
   }
