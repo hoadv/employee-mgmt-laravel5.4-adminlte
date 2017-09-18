@@ -50,12 +50,12 @@ class EmployeeManagementController extends Controller
      */
     public function create()
     {
-        $cities = City::all();
-        $states = State::all();
+        // $cities = City::all();
+        // $states = State::all();
         $countries = Country::all();
         $departments = Department::all();
         $divisions = Division::all();
-        return view('employees-mgmt/create', ['cities' => $cities, 'states' => $states, 'countries' => $countries,
+        return view('employees-mgmt/create', ['countries' => $countries,
         'departments' => $departments, 'divisions' => $divisions]);
     }
 

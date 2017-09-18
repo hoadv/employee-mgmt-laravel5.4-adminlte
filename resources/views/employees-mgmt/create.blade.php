@@ -62,32 +62,35 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-4 control-label">City</label>
+                            <label class="col-md-4 control-label">Country</label>
                             <div class="col-md-6">
-                                <select class="form-control" name="city_id">
-                                    @foreach ($cities as $city)
-                                        <option value="{{$city->id}}">{{$city->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                              <div class="form-group">
-                            <label class="col-md-4 control-label">State</label>
-                            <div class="col-md-6">
-                                <select class="form-control" name="state_id">
-                                    @foreach ($states as $state)
-                                        <option value="{{$state->id}}">{{$state->name}}</option>
+                                <select class="form-control js-country" name="country_id">
+                                    <option value="-1">Please select your country</option>
+                                    @foreach ($countries as $country)
+                                        <option value="{{$country->id}}">{{$country->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-4 control-label">Country</label>
+                            <label class="col-md-4 control-label">State</label>
                             <div class="col-md-6">
-                                <select class="form-control" name="country_id">
-                                    @foreach ($countries as $country)
-                                        <option value="{{$country->id}}">{{$country->name}}</option>
-                                    @endforeach
+                                <select class="form-control js-states" name="state_id">
+                                    <option value="-1">Please select your state</option>
+                                    {{--  @foreach ($states as $state)
+                                        <option value="{{$state->id}}">{{$state->name}}</option>
+                                    @endforeach  --}}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">City</label>
+                            <div class="col-md-6">
+                                <select class="form-control js-cities" name="city_id">
+                                    <option value="-1">Please select your city</option>
+                                    {{--  @foreach ($cities as $city)
+                                        <option value="{{$city->id}}">{{$city->name}}</option>
+                                    @endforeach  --}}
                                 </select>
                             </div>
                         </div>

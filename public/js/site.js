@@ -27,12 +27,12 @@ function loadItems(element, path, selectInputClass) {
 function loadStates(element) {
   $('.js-states').empty().append('<option value="-1">Please select your state</option>');
   $('.js-cities').empty().append('<option value="-1">Please select your city</option>');
-  loadItems(element, 'api/states/', '.js-states');
+  loadItems(element, '../api/states/', '.js-states');
 }
 
 function loadCities(element) {
   $('.js-cities').empty().append('<option value="-1">Please select your city</option>');;
-  loadItems(element, 'api/cities/', '.js-cities');
+  loadItems(element, '../api/cities/', '.js-cities');
 }
 
 function registerEvents() {
