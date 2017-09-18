@@ -14,8 +14,8 @@ class CreateEmployeeSalaryTable extends Migration
     public function up()
     {
         Schema::create('employee_salary', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('employee_id');
+            $table->increments('id', true);
+            $table->integer('employee_id')->unsigned();
             $table->foreign('employee_id')->references('id')->on('employee');
             $table->decimal('salary', 16, 2);
             $table->timestamps();
