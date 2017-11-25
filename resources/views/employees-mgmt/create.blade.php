@@ -62,32 +62,35 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-4 control-label">City</label>
+                            <label class="col-md-4 control-label">Country</label>
                             <div class="col-md-6">
-                                <select class="form-control" name="city_id">
-                                    @foreach ($cities as $city)
-                                        <option value="{{$city->id}}">{{$city->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                              <div class="form-group">
-                            <label class="col-md-4 control-label">State</label>
-                            <div class="col-md-6">
-                                <select class="form-control" name="state_id">
-                                    @foreach ($states as $state)
-                                        <option value="{{$state->id}}">{{$state->name}}</option>
+                                <select class="form-control js-country" name="country_id">
+                                    <option value="-1">Please select your country</option>
+                                    @foreach ($countries as $country)
+                                        <option value="{{$country->id}}">{{$country->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-4 control-label">Country</label>
+                            <label class="col-md-4 control-label">State</label>
                             <div class="col-md-6">
-                                <select class="form-control" name="country_id">
-                                    @foreach ($countries as $country)
-                                        <option value="{{$country->id}}">{{$country->name}}</option>
-                                    @endforeach
+                                <select class="form-control js-states" name="state_id">
+                                    <option value="-1">Please select your state</option>
+                                    {{--  @foreach ($states as $state)
+                                        <option value="{{$state->id}}">{{$state->name}}</option>
+                                    @endforeach  --}}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">City</label>
+                            <div class="col-md-6">
+                                <select class="form-control js-cities" name="city_id">
+                                    <option value="-1">Please select your city</option>
+                                    {{--  @foreach ($cities as $city)
+                                        <option value="{{$city->id}}">{{$city->name}}</option>
+                                    @endforeach  --}}
                                 </select>
                             </div>
                         </div>
@@ -139,7 +142,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group{{ $errors->has('department_id') ? ' has-error' : '' }}">
                             <label class="col-md-4 control-label">Department</label>
                             <div class="col-md-6">
                                 <select class="form-control" name="department_id">
@@ -147,9 +150,14 @@
                                         <option value="{{$department->id}}">{{$department->name}}</option>
                                     @endforeach
                                 </select>
+                                 @if ($errors->has('department_id'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('department_id') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group{{ $errors->has('division_id') ? ' has-error' : '' }}">
                             <label class="col-md-4 control-label">Division</label>
                             <div class="col-md-6">
                                 <select class="form-control" name="division_id">
@@ -157,6 +165,11 @@
                                         <option value="{{$division->id}}">{{$division->name}}</option>
                                     @endforeach
                                 </select>
+                                 @if ($errors->has('division_id'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('division_id') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
                         <div class="form-group">

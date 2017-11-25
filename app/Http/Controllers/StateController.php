@@ -16,7 +16,7 @@ class StateController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->only(["index", "create", "store", "edit", "update", "search", "destroy"]);
     }
 
     /**
@@ -126,6 +126,12 @@ class StateController extends Controller
          return redirect()->intended('system-management/state');
     }
 
+    public function loadStates($countryId) {
+        $states = State::where('country_id', '=', $countryId)->get(['id', 'name']);
+
+        return response()->json($states);
+    }
+    
     /**
      * Search state from database base on some specific constraints
      *

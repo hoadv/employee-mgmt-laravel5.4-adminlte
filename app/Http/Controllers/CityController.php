@@ -16,7 +16,7 @@ class CityController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->only(["index", "create", "store", "edit", "update", "search", "destroy"]);
     }
 
     /**
@@ -126,6 +126,12 @@ class CityController extends Controller
          return redirect()->intended('system-management/city');
     }
 
+    public function loadCities($stateId) {
+        $cities = City::where('state_id', '=', $stateId)->get(['id', 'name']);
+
+        return response()->json($cities);
+    }
+
     /**
      * Search city from database base on some specific constraints
      *
@@ -140,7 +146,7 @@ class CityController extends Controller
        $cities = $this->doSearchingQuery($constraints);
        return view('system-mgmt/city/index', ['cities' => $cities, 'searchingVals' => $constraints]);
     }
-
+    
     private function doSearchingQuery($constraints) {
         $query = City::query();
         $fields = array_keys($constraints);
