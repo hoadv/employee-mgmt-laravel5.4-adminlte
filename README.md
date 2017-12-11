@@ -1,6 +1,6 @@
 ## Available functionalities:
 
-+Login and logout, forget password  (Lock account in 5 minutes after 3 failed attempts).
++ Login and logout, forget password  (Lock account in 5 minutes after 3 failed attempts).
 
 + Manage employees (Add, edit and delete).
 
