@@ -33,7 +33,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <![endif]-->
   <style type="text/css">
     body{
-      background-color: blue;
+      background-color: green;
     }
   </style>
 </head>
