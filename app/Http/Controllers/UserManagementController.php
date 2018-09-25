@@ -88,7 +88,7 @@ class UserManagementController extends Controller
     {
         $user = User::find($id);
         // Redirect to user list if updating user wasn't existed
-        if ($user == null || count($user) == 0) {
+        if ($user == null || $user->count() == 0) {
             return redirect()->intended('/user-management');
         }
 
